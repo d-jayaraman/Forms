@@ -27,28 +27,33 @@ Given(/^Policy number is "(.*?)" for "(.*?)"$/, (upolnum, scenario) => {
   })
 });
 
+Then(/^Verify Policy number$/, () => {
+  const version = xmldata.getElementsByTagName("Version")[0];
+  const polid = version.getElementsByTagName("PolicyId")[0].childNodes[0].toString();
+  assert.equal(polid, '110801104017001', 'Failed::Policy ID did not Match');
+});
+
 Then(/^Verify company address$/, () => {
     const programprofile = xmldata.getElementsByTagName("ProgramProfile")[0];
     const compname = programprofile.getElementsByTagName("PrintCoName1")[0].childNodes[0].toString();
     const compadd1 = programprofile.getElementsByTagName("PrintCoAddr1")[0].childNodes[0].toString();
     const compadd2 = programprofile.getElementsByTagName("PrintCoAddr2")[0].childNodes[0].toString();
-    console.log(compadd1, compadd2);
     assert.equal(compname,'Infinity Value Added', 'Failed::Company name is wrong');
-    assert.equal(compadd1,'2201 4th AvenueNorth', 'Failed::Company address is wrong');
+    assert.equal(compadd1,'2201 4th Avenue North', 'Failed::Company address is wrong');
 });
 
-Then(/^Verify Policy number$/, () => {
-  const polid = xmldata.getElementsByTagName("PolicyId")[0].childNodes[0].toString();
-  assert.equal(polid, '110801104017001', 'Failed::Policy ID did not Match');
+Then(/^Verify Agency ID$/, () => {
+  const agency = xmldata.getElementsByTagName("Agency")[0];
+  const agencynum = agency.getElementsByTagName("AgencyNum")[0].childNodes[0].toString();
+  assert.equal(agencynum, '9999', 'Failed::Agency Number ID did not Match');
 });
-
   /*
-  var transactiontinfo = xml.responseXML.getElementsByTagName("TransactionInfo")[0];
-  var programprofile = xml.responseXML.getElementsByTagName("ProgramProfile")[0];
-  var version = xml.responseXML.getElementsByTagName("Version")[0];
-  var fin_cancel = xml.responseXML.getElementsByTagName("Financial")[0].getElementsByTagName("CancelPending")[0];
-  var agency = xml.responseXML.getElementsByTagName("Agency")[0];
-  var polholder = xml.responseXML.getElementsByTagName("PolHolder")[0];
+  const transactiontinfo = xmldata.getElementsByTagName("TransactionInfo")[0];
+  const programprofile = xmldata.getElementsByTagName("ProgramProfile")[0];
+  const version = xmldata.getElementsByTagName("Version")[0];
+  const fin_cancel = xmldata.getElementsByTagName("Financial")[0].getElementsByTagName("CancelPending")[0];
+  const agency = xmldata.getElementsByTagName("Agency")[0];
+  const polholder = xmldata.getElementsByTagName("PolHolder")[0];
 
 
  // console.log(compname).innerHTML;
