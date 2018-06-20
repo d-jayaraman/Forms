@@ -23,6 +23,7 @@ Once your tools are configured, download the project and navigate to the root di
 * Run: `npm install`
 * Install allure reporter: `npm install -g allure-commandline --save-dev`
 * If everything built successfully, you're ready to run tests.
+* Run 'allure generate .\allure-results\ --clean ; .\node_modules\.bin\allure open' to open allure reports
 
 ## Running Tests
 * `npm run <BROWSER>` <BROWSER> can be chrome, firefox, edge, ie11, safari, androidEmulator, iphoneSimulator and others (full list in capabilities.json)
