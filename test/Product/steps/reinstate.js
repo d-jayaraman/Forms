@@ -3,7 +3,7 @@ import Constants from "../../../src/utility/constants";
 import Driver from "../../../src/utility/driver";
 import Email from "../../../src/utility/email";
 
-// Pulling page specific locators and data
+// Pulling XML specific locators and data
 const pagePath = Constants.getLocatorPath();
 const dataPath = "../data/";
 
