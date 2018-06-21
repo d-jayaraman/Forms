@@ -8,7 +8,7 @@ let pagePath = Constants.getLocatorPath();
 /**
  * Common Steps
  */
-Given(/^Policy number is "(.*?)" for "(.*?)"$/, (upolnum, scenario) => {
+Given(/^policy number is "(.*?)" for "(.*?)"$/, (upolnum, scenario) => {
   return new Promise(function(resolve, reject) {
     const filename = upolnum + '_' + scenario + ' XML.xml',
           fs = require('fs'),
@@ -27,14 +27,14 @@ Given(/^Policy number is "(.*?)" for "(.*?)"$/, (upolnum, scenario) => {
   })
 });
 
-Then(/^Verify Policy number$/, () => {
+Then(/^verify policy number$/, () => {
   const version = xmldata.getElementsByTagName("Version")[0];
   const polid = version.getElementsByTagName("PolicyId")[0].childNodes[0].toString();
   //assert.equal(polid, '110801104017001', 'Failed::Policy ID did not Match');
   console.log("polid "+ polid);
 });
 
-Then(/^Verify company address$/, () => {
+Then(/^verify company address$/, () => {
     const programprofile = xmldata.getElementsByTagName("ProgramProfile")[0];
     const compname = programprofile.getElementsByTagName("PrintCoName1")[0].childNodes[0].toString();
     const compadd1 = programprofile.getElementsByTagName("PrintCoAddr1")[0].childNodes[0].toString();
@@ -44,20 +44,20 @@ Then(/^Verify company address$/, () => {
     console.log(compname+compadd1+compadd2);
 });
 
-Then(/^Verify Agency ID$/, () => {
+Then(/^verify agency id$/, () => {
   const agency = xmldata.getElementsByTagName("Agency")[0];
   const agencynum = agency.getElementsByTagName("AgencyNum")[0].childNodes[0].toString();
   //assert.equal(agencynum, '9999', 'Failed::Agency Number ID did not Match');
   console.log("agencynum" + agencynum);
 });
 
-Then(/^Verify Date of Notice$/, () => {
+Then(/^verify date of notice$/, () => {
   const transactiontinfo = xmldata.getElementsByTagName("TransactionInfo")[0];
   const dateofnotice = transactiontinfo.getElementsByTagName("Field")[0].childNodes[0].toString();
   console.log("dateofnotice "+ dateofnotice);
 });
 
-Then(/^Verify Insured person details$/, () => {
+Then(/^verify insured person details$/, () => {
   const polholder = xmldata.getElementsByTagName("PolHolder")[0];
   const firstname = polholder.getElementsByTagName("FirstName")[0].childNodes[0].toString();
   console.log(firstname);
