@@ -76,3 +76,8 @@ Then(/^verify insured person details$/, () => {
   //console.log(firstname+lastname+mailaddr1+mailaddr2+mailcity+mailstate+mailzip);
 });
 
+Then(/^Verify name insured$/, () => {
+  const polholder = xmldata.getElementsByTagName("PolHolder")[0];
+  const nameinsured = polholder.getElementsByTagName("NamedInsured")[0].childNodes[0].toString();
+  console.log(nameinsured);
+  });
