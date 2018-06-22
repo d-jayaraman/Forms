@@ -10,6 +10,7 @@ let pagePath = Constants.getLocatorPath();
  */
 Given(/^policy number is "(.*?)" for "(.*?)"$/, (upolnum, scenario) => {
   return new Promise(function(resolve, reject) {
+    global.scenario=scenario;
     const filename = upolnum + '_' + scenario + ' XML.xml',
           fs = require('fs'),
           path = require('path'),
@@ -26,6 +27,15 @@ Given(/^policy number is "(.*?)" for "(.*?)"$/, (upolnum, scenario) => {
         );
   })
 });
+
+
+Then(/^verify scenario$/, () => {
+  const version = xmldata.getElementsByTagName("Packet")[0];
+  const packettype = version.getElementsByTagName("PacketType")[0].childNodes[0].toString();
+  assert.equal(packettype, scenario, 'Failed::Scenario-XML mismatch');
+  console.log("packettype "+ packettype);
+});
+
 
 Then(/^verify policy number$/, () => {
   const version = xmldata.getElementsByTagName("Version")[0];
@@ -65,7 +75,7 @@ Then(/^verify insured person details$/, () => {
   console.log(lastname);
   const mailaddr1 = polholder.getElementsByTagName("MailAddr1")[0].childNodes[0].toString();
   console.log(mailaddr1);
-  const mailaddr2 = polholder.getElementsByTagName("MailAddr2")[0].childNodes[0];
+  const mailaddr2 = polholder.getElementsByTagName("MailAddr2")[0].childNodes[0].toString();
   if(mailaddr2!=null){console.log(mailaddr2);};
   const mailcity = polholder.getElementsByTagName("MailCity")[0].childNodes[0].toString();
   console.log(mailcity);
