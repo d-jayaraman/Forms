@@ -5,10 +5,11 @@ Feature: Forms Automation
 Scenario: Verify Renewal Packet
   Given policy number is "110046044079004" for "Renewal"
   Then verify scenario
-  And verify policy number
-  And verify company address
+  #And verify policy number
+  #And verify company address
   And verify insured person details
-  And verify policy period
+  #And verify policy period
+  And verify driver details
 
 
 # @CancelPending

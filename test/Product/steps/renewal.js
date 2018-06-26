@@ -14,8 +14,17 @@ Then(/^verify policy period$/, () => {
   console.log("Policy Period "+ polfrom + " TO " + polto);
 });
 
-Then(/^verify notice of cancellation previously forwarded effective date$/, () => {
-  const financial = xmldata.getElementsByTagName("Financial")[0];
-  const prevcanceldate = financial.getElementsByTagName("PREV_CANCEL_DATE")[0].childNodes[0].toString();
-  console.log("prevcanceldate "+prevcanceldate);
+Then(/^verify driver details$/, () => {
+
+   var x, i, txt;
+    txt = "";
+    x = xmldata.getElementsByTagName("Active")[0].childNodes;
+    const drivers = xmldata.getElementsByTagName("Drivers")[0];
+   // console.log(x);
+     for (i = 0; i< x.length; i++) {
+      txt += drivers.getElementsByTagName("Name")[i].childNodes[0];
+       console.log("txt inside  "+ txt);
+     }
+    console.log("txt outside   "+ txt);
+
 });
