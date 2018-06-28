@@ -9,9 +9,9 @@ const dataPath = "../data/";
 
 Then(/^verify policy period$/, () => {
   const packet = xmldata.getElementsByTagName("Packet")[0];
-  const polfrom = packet.getElementsByTagName("OrigEffDate")[0].childNodes[0];
-  const polto = packet.getElementsByTagName("OrigExpDate")[0].childNodes[0];
-  console.log("Policy Period "+ polfrom + " TO " + polto);
+  const polFrom = packet.getElementsByTagName("OrigEffDate")[0].childNodes[0];
+  const polTo = packet.getElementsByTagName("OrigExpDate")[0].childNodes[0];
+  console.log("Policy Period "+ polFrom + " TO " + polTo);
 });
 
 Then(/^verify active driver details$/, () => {
@@ -27,16 +27,18 @@ Then(/^verify active driver details$/, () => {
 });
 
 Then(/^verify excluded driver details$/, () => {
-  const excludedDrivers = xmldata.getElementsByTagName("Excluded")[0].childNodes;
-  const excludedDriversXml = xmldata.getElementsByTagName("Excluded")[0];
+  const activeDrivers = xmldata.getElementsByTagName("Active")[0].childNodes;
+  const excludedDriverXml = xmldata.getElementsByTagName("Drivers")[0].getElementsByTagName("Excluded")[activeDrivers.length];//data
+
+  const excludedDrivers = excludedDriverXml.getElementsByTagName("Driver")[0].childNodes;
   //const edriverNum = excludedDriversXml.getElementsByTagName("DriverNum")[0].childNodes[0].toString();
-  console.log (excludedDriversXml);
+ // console.log ("XML is "+ excludedDriverXml);
     for (var i = 0; i<excludedDrivers.length; i++) {
-      //const edriverNum = excludedDriversXml.getElementsByTagName("DriverNum")[0].childNodes[0].toString();
-      //const eDriverName = drivers.getElementsByTagName("Name")[i].childNodes[0];
-      //const eDriverStaus = drivers.getElementsByTagName("Excluded")[i].childNodes[0];
-      //const eDriverSR22 = drivers.getElementsByTagName("SR22")[i].childNodes[0];
-      //console.log(driverNum+" "+ driverName+" "+ driverStaus+" "+ driverSR22);
+      const edriverNum = excludedDriverXml.getElementsByTagName("DriverNum")[0].childNodes[0].toString();
+      const eDriverName = excludedDriverXml.getElementsByTagName("Name")[i].childNodes[0];
+      const eDriverStaus = excludedDriverXml.getElementsByTagName("Excluded")[i].childNodes[0];
+      const eDriverSR22 = excludedDriverXml.getElementsByTagName("SR22")[i].childNodes[0];
+      console.log(edriverNum+" "+ eDriverName+" "+ eDriverStaus+" "+ eDriverSR22);
       console.log("  I  "+i);
     }
 });
